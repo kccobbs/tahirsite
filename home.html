@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tahir Russell – Media & Communications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #2f00ff;
+      --section-bg: #f5faff;
+      --border-color: #6092ff;
+    }
+
+    body.dark-mode {
+      --bg-color: #0a0f1a;
+      --text-color: #ffffff;
+      --accent-color: #58a6ff;
+      --section-bg: #121b29;
+      --border-color: #1f2d40;
+    }
+
+    body {
+      margin: 0;
+       font-family: 'Inter', sans-serif;
+       font-size: 15px;
+       font-weight: 400;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 1s ease, color 1s ease;
+    }
+
+    header.hero {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), var(--bg-color)),
+                url('static/background.png') center/cover no-repeat;
+      text-align: center;
+      padding: 14rem 2rem 6rem;
+      position: relative;
+      transition: background 1s ease;
+    }
+
+    .hero-overlay {
+      background-color: rgba(255, 255, 255, 0.7); /* or rgba(0,0,0,0.5) for dark mode */
+      padding: 2rem;
+      border-radius: 1rem;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      color: var(--accent-color);
+    }
+
+    .hero-buttons {
+      margin-top: 2rem;
+    }
+
+    .hero-buttons a {
+      background-color: var(--accent-color);
+      color: #fff;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    .hero-buttons a:hover {
+      background-color: #fff;
+      color: var(--accent-color);
+      box-shadow: 0 4px 16px rgba(47,0,255,0.10);
+      border: 2px solid var(--accent-color);
+      text-decoration: none;
+    }
+
+    .theme-toggle-container {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle-container span {
+      color: #fff !important;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--border-color);
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent-color);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    section {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    }
+
+    section h2 {
+      font-size: 2rem;
+        font-size: 1.5rem;
+         font-weight: 700;
+         margin-bottom: 1rem;
+      margin-top: 0;
+      color: var(--accent-color);
+    }
+
+    section:not(:first-of-type) {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 2rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    a {
+      color: var(--accent-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* Snapshot List */
+.snapshot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.snapshot-list li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Highlight Cards */
+
+.highlight-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.highlight-card {
+  box-shadow: none;
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+/* Skill Tags */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;                  /* was 0.75rem */
+  margin-top: 0.5rem;           /* was 1rem */
+}
+.skill-tags span {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 30px;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;       /* was 0.5rem 1rem */
+  font-size: 0.85rem;           /* was 0.9rem */
+}
+
+.resume-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.resume-card {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+
+.resume-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.resume-card h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .resume-grid {
+    grid-template-columns: 1fr;
+  }
+}
+body.dark-mode .resume-card {
+  background-color: #181f2a;
+  color: #fff;
+  border: 1px solid #263143;
+}
+body.dark-mode .highlight-card {
+  background-color: #232b39;
+  color: #fff;
+  border: 1px solid #263143;
+}
+#about h2 {
+  text-align: center;
+}
+  </style>
+</head>
+<body
+  class="dark-mode"
+>
+  <header class="hero">
+    <div class="theme-toggle-container">
+      <span>Toggle Theme</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch" onclick="toggleMode()">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <img src="static/headshot.jpeg" alt="Tahir Russell headshot" class="hero-headshot" />
+    <h1>Tahir Russell</h1>
+    <p>Media Producer · Scriptwriter · Storyteller</p>
+    <div class="hero-buttons">
+      <a href="mailto:tahir.russell@gmail.com">Contact</a>
+    </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>My name is Tahir Russell and I am a media professional with a well-rounded experience in both entertainment production as well as digital media buying.</p>
+    <p>Throughout the course of my career, I have been part of major productions ranging from talk shows, performances, experiential events and pilot presentations.</p>
+    <p>The knowledge & experience I’ve gained has been invaluable. Let’s connect!</p>
+  </section>
+
+<section id="resume-sections" class="resume-grid">
+  <div class="resume-card">
+    <h2>Snapshot</h2>
+    <ul class="snapshot-list">
+      <li><strong>$2.5M+</strong> media budget managed quarterly</li>
+      <li><strong>1000% growth</strong> in social media engagement</li>
+      <li><strong>7 campaigns</strong> optimized through performance data</li>
+      <li><strong>3 years</strong> in national television production</li>
+      <li><strong>BA in Journalism</strong>, Cum Laude from Rutgers</li>
+    </ul>
+  </div>
+
+    </div>
+  </div>
+
+  <div class="resume-card">
+    <h2>Skills & Tools</h2>
+    <div class="skill-tags">
+      <span>Media Buying</span>
+      <span>Scriptwriting</span>
+      <span>Client Management</span>
+      <span>Campaign Strategy</span>
+      <span>Nielsen</span>
+      <span>LexisNexis</span>
+      <span>Talent Coordination</span>
+    </div>
+  </div>
+</section>
+
+
+<div class="clips-bg-fullwidth">
+  <section id="work" class="clips-section">
+  <h2 class="clips-title">Featured Clips</h2>
+  <div class="clips-container">
+    <div class="clip-column">
+      <h3 class="clip-header">Page Six TV</h3>
+      <iframe src="https://www.youtube.com/embed/HyPi77kyDO4" allowfullscreen title="Page Six - 2"></iframe>
+      <iframe src="https://www.youtube.com/embed/_fjKxtSasKU" allowfullscreen title="Page Six - 3"></iframe>
+      <iframe src="https://www.youtube.com/embed/Rru-BwznOI0" allowfullscreen title="Page Six - 4"></iframe>
+    </div>
+    <div class="clip-column">
+      <h3 class="clip-header">The Drew Barrymore Show</h3>
+      <iframe src="https://www.youtube.com/embed/woIY6dUXHRg" allowfullscreen title="Drew Barrymore - 1"></iframe>
+      <iframe src="https://www.youtube.com/embed/W-D25jghhFQ" allowfullscreen title="Drew Barrymore - 2"></iframe>
+      <iframe src="https://www.youtube.com/embed/zm8-oU9hZq0" allowfullscreen title="Drew Barrymore - 3"></iframe>
+    </div>
+  </div>
+</section>
+</div>
+
+<section id="resume-sections" class="resume-grid">
+<div class="resume-card">
+    <h2>Media Strategy</h2>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>Zenith Media</h3>
+        <p>Ran campaigns across platforms with strong ROI on $2.5M budget.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Black Sheep Bar</h3>
+        <p>Led brand growth with social strategy resulting in 1000% follower increase.</p>
+      </div>
+    </div>
+    </div>
+
+  <div class="resume-card">
+    <h2>TV Production Highlights</h2>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>Paramount</h3>
+        <p>Scripted segments, booked talent, and developed audience strategies for national TV.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Endemol Shine</h3>
+        <p>Produced entertainment news, interviewed celebrities, and launched <em>Fashion Friday</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clips-bg-fullwidth {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: var(--section-bg);
+    padding: 4rem 0;
+  }
+  .clips-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    background: none;
+    box-shadow: none;
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 1s ease, color 1s ease;
+  }
+
+  .clips-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .clips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  .clip-column {
+    flex: 1 1 40%;
+    min-width: 300px;
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: background-color 1s ease;
+  }
+
+  .clip-header {
+    color: var(--accent-color);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 0.75rem;
+    margin-top: 1rem;
+  }
+  .hero-headshot {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 2rem auto;
+    display: block;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    object-position: center top;
+  }
+</style>
+
+
+
+  <section>
+    <h2>Contact</h2>
+    <p>Let's connect: <a href="mailto:tahir@example.com">tahir.russell@gmail.com</a></p>
+  </section>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+      updateThemeLabel();
+    }
+    function updateThemeLabel() {
+      const label = document.querySelector('.theme-toggle-container span');
+      if (document.body.classList.contains('dark-mode')) {
+        label.textContent = 'Dark Mode';
+      } else {
+        label.textContent = 'Light Mode';
+      }
+    }
+    // Set label on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // If body does not already have dark-mode, add it
+      if (!document.body.classList.contains('dark-mode')) {
+        document.body.classList.add('dark-mode');
+      }
+      updateThemeLabel();
+    });
+  </script>
+</body>
+</html>
